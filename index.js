@@ -5,8 +5,7 @@ const init = () => {
 
 const initClear = () => {
     document.onkeydown = (evt) => {
-        evt = evt || window.event;
-        if (evt.keyCode === 27) {
+        if (evt.code === "Escape") {
             getScreen().innerText = '0';
             console.log('cleared screen');
         }
