@@ -1,8 +1,3 @@
-const init = () => {
-    initClear();
-    initButtonsEvents();
-}
-
 const initClear = () => {
     document.onkeydown = (evt) => {
         if (evt.code === "Escape") {
@@ -15,15 +10,15 @@ const initClear = () => {
 const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
 const getScreen = () => {
-    return document.getElementsByClassName('calculator__screen')[0];
+    return document.getElementById('screen');
 }
 
 const initButtonsEvents = () => {
-    const buttons = document.getElementsByClassName("calculator__button");
+    const buttons = document.getElementsByClassName('calculator__button');
 
     Array.from(buttons).forEach((el) => {
         const text = el.innerText;
-        const buttonDigit = parseInt(text, 10);
+        const buttonDigit = Number(text);
         if (digits.includes(buttonDigit)) {
             addDigitListener(el, buttonDigit);
         } else {
@@ -34,9 +29,9 @@ const initButtonsEvents = () => {
 
 const addDigitListener = (el, buttonDigit) => {
     el.addEventListener('click', () => {
-        if ((getScreen().innerText == "0") && (buttonDigit == "0")) {
-            console.log("Can't duplicate zerous ion screen");
-        } else if ((getScreen().innerText == "0") && (buttonDigit !== "0")) {
+        if ((getScreen().innerText === "0") && (buttonDigit === "0")) {
+            console.log("Can't duplicate zerous on screen");
+        } else if ((getScreen().innerText === "0") && (buttonDigit !== "0")) {
             getScreen().innerText = buttonDigit;
         } else {
             getScreen().innerText += buttonDigit;
@@ -51,3 +46,6 @@ const addOperationListener = (el, text) => {
             : getScreen().innerText += text;
     });
 }
+
+initClear();
+initButtonsEvents();
