@@ -42,9 +42,20 @@ const addDigitListener = (el, buttonDigit) => {
 const addOperationListener = (el, text) => {
     el.addEventListener('click', () => {
         text === '='
-            ? getScreen().innerText = eval(getScreen().innerText)
+            ? evalAndLog()
             : getScreen().innerText += text;
     });
+}
+
+const evalAndLog = () => {
+    const text = getScreen().innerText;
+
+    const record = text + '=' + eval(text);
+
+    const log = document.getElementById("log");
+    log.innerHTML += '<li>' + record  + '</li>';
+
+    getScreen().innerText = '';
 }
 
 initClear();
